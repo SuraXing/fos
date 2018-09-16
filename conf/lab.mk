@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 LAB=2
 PACKAGEDATE=Wed Sep 12 14:51:29 EDT 2018
+=======
+LAB=1
+PACKAGEDATE=Thu Aug 30 15:16:04 EDT 2018
+>>>>>>> 6.828 project

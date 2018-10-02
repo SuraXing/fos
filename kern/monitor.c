@@ -68,14 +68,14 @@ mon_backtrace(int argc, char **argv, struct Trapframe *tf)
 	{
 		cprintf("  ebp:0x%08x eip:0x%08x args:", ebp, eip);
 		uint32_t *args = (uint32_t *)ebp + 2;
-		for (j = 0; i < 5; j++) {
+		for (j = 0; j < 5; j++) {
 			cprintf("%08x ", args[j]);
 		}
-
+		cprintf("\n");
 		//old ip/bp which are stored in memory that ebp point to
-		struct Eipdebuginfo info = new(struct Eipdebuginfo);
-		debuginfo_eip((uintptr_t)eip, info);
-		cprintf("file: %s, file_line : %d: 'func_name : %s func_args : %d\n", info.eip_file, info.eip_line, info.eip_fn_name, info.eip_fn_narg)
+		struct Eipdebuginfo info ;
+		debuginfo_eip((uintptr_t)eip, &info);
+		cprintf("file: %s, file_line : %d, func_name : %s, func_args : %d.\n", info.eip_file, info.eip_line, info.eip_fn_name, info.eip_fn_narg);
 		
 		eip = ((uint32_t *)ebp)[1];
 		ebp = ((uint32_t *)ebp)[0];

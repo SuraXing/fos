@@ -268,12 +268,14 @@ page_init(void)
 	// NB: DO NOT actually touch the physical memory corresponding to
 	// free pages!
 	size_t i;
+	page_free_list = NULL;
+
 	for (i = 0; i < npages; i++) {
 		if (i == 0) {
 			pages[i].pp_ref = 1;
 			pages[i].pp_link = NULL;
 		}
-		else if (i < npages_basemem/PGSIZE) {
+		else if (i < npages_basemem) {
 			pages[i].pp_ref = 0;
 			pages[i].pp_link = page_free_list;
 			page_free_list = &pages[i];
@@ -281,7 +283,7 @@ page_init(void)
 		else if (i >= IOPHYSMEM/PGSIZE && i < EXTPHYSMEM/PGSIZE) {
 			pages[i].pp_ref = 1;
 		}
-		else if (i >= EXTPHYSMEM/PGSIZE || i < PADDR(boot_alloc(0))/PGSIZE) {
+		else if (i >= EXTPHYSMEM/PGSIZE && i < PADDR(boot_alloc(0))/PGSIZE) {
 			pages[i].pp_ref++;
 			pages[i].pp_link = NULL;
 		}

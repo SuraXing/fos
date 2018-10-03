@@ -31,9 +31,10 @@ i386_init(void)
 	//test_backtrace(5);
 
 	// Drop into the kernel monitor.
-	int j = 1;
-	while (j)
-		j = monitor(NULL);
+	while (1) {
+		monitor(NULL);
+		return ;
+	}
 }
 
 

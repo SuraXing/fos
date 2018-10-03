@@ -25,9 +25,15 @@ static struct Command commands[] = {
 	{ "help", "Display this list of commands", mon_help },
 	{ "kerninfo", "Display information about the kernel", mon_kerninfo },
 	{ "backtrace", "Display stack trace", mon_backtrace },
+	{ "exit", "exit the kernal", exit},
 };
 
 /***** Implementations of basic kernel monitor commands *****/
+
+int
+exit(int argc, char **argv, struct Trapframe *tf) {
+	return -1;
+}
 
 int
 mon_help(int argc, char **argv, struct Trapframe *tf)

@@ -269,11 +269,11 @@ page_init(void)
 	// free pages!
 	size_t i;
 	for (i = 0; i < npages; i++) {
-		if (i == 0){
+		if (i == 0) {
 			pages[i].pp_ref = 1;
 			pages[i].pp_link = NULL;
 		}
-		else if (i < npages_basemem) {
+		else if (i < npages_basemem/PGSIZE) {
 			pages[i].pp_ref = 0;
 			pages[i].pp_link = page_free_list;
 			page_free_list = &pages[i];

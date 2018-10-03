@@ -25,7 +25,7 @@ static struct Command commands[] = {
 	{ "help", "Display this list of commands", mon_help },
 	{ "kerninfo", "Display information about the kernel", mon_kerninfo },
 	{ "backtrace", "Display stack trace", mon_backtrace },
-	{ "exit", "exit the kernal", exit},
+	{ "exit", "exit the kernal", exit },
 };
 
 /***** Implementations of basic kernel monitor commands *****/
@@ -138,7 +138,7 @@ runcmd(char *buf, struct Trapframe *tf)
 	return 0;
 }
 
-void
+int
 monitor(struct Trapframe *tf)
 {
 	char *buf;
@@ -153,4 +153,6 @@ monitor(struct Trapframe *tf)
 			if (runcmd(buf, tf) < 0)
 				break;
 	}
+
+	return 0;
 }

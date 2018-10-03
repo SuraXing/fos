@@ -312,13 +312,13 @@ page_alloc(int alloc_flags)
 
 	//out of memory
 	if (page_free_list == NULL) {
-		return NULL
+		return NULL;
 	}
 
 	struct PageInfo *p;
 	p = page_free_list;
-	page_free_list = page_free_list.pp_link;
-	p.pp_link = NULL;
+	page_free_list = page_free_list->pp_link;
+	p->pp_link = NULL;
 
 	if (alloc_flags & ALLOC_ZERO) {
 		//TODO why use virtual memory here ?
